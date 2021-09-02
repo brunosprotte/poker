@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
 
 import { Container, CardPlaceHolder, CardFront, CardBack } from './Card.styles';
@@ -13,7 +12,7 @@ const Card: React.FC<CardProps> = ({ isRevealed, value }) => (
         <CardPlaceHolder isRevealed={isRevealed}>
             <CardBack />
             <CardFront>
-                <Typography>{value}</Typography>
+                {value}
             </CardFront>
         </CardPlaceHolder>
     </Container>

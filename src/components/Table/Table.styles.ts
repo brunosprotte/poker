@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const Container = withTheme(styled('div')`
     display: flex;
+    flex-direction: column;
 
     width: 400px;
     height: 200px;
@@ -18,11 +19,6 @@ export const Container = withTheme(styled('div')`
 
 export const AgreementContainer = withTheme(styled('div')`
     display: flex;
-
-    align-items: center;
-    justify-content: center;
-
     color: ${props => props.theme.palette.primary.main};
-
-    bottom: 15px;
+    margin-top: 53px;
 `);

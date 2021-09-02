@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import HandCardItem from './HandCardItem';
 
@@ -40,7 +39,7 @@ const HandCard: React.FC<HandCardProps> = ({ handType }) => {
 
     const createItem = (index: string | number) => (
         <HandCardItem key={index} isSelected={handleIsSelected(index)} onClick={() => handleSelectItem(index)}>
-            <Typography>{index}</Typography>
+            {index}
         </HandCardItem>
     );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 
 import { Container, AgreementContainer } from './Table.styles';
 
@@ -10,13 +10,13 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ handleRevealCards }) => (
     <Container>
         <Button variant='outlined' color='primary' onClick={handleRevealCards}>
-            <Typography>Reveal</Typography>
+            Reveal
         </Button>
 
         <AgreementContainer>
-            <Typography>
-                agreement
-            </Typography>
+            <Box fontWeight={500}>
+                AGREEMENT
+            </Box>
         </AgreementContainer>
 
     </Container>
