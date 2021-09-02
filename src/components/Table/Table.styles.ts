@@ -16,4 +16,13 @@ export const Container = withTheme(styled('div')`
     margin: 20px;
 `);
 
-export default Container;
+export const AgreementContainer = withTheme(styled('div')`
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: ${props => props.theme.palette.primary.main};
+
+    bottom: 15px;
+`);

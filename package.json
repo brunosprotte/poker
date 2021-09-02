@@ -36,6 +36,7 @@
     "eslint-plugin-modules-newline": "^0.0.6",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "babel-plugin-inline-react-svg": "^2.0.1"
   }
 }
