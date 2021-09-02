@@ -1,3 +1,81 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        // "plugin:react/recommended",
+        "airbnb",
+        "prettier",
+        "plugin:cypress/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "cypress"
+    ],
+    "rules": {
+        "indent": ["error", 4],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "import/extensions": "off",
+        "no-use-before-define": "off",
+        "no-multiple-empty-lines": ["error", { "max": 1 }],
+        "react/display-name": "off",
+        "react/prop-types": "off",
+        "no-console": "error",
+        "prefer-const": "error",
+        "prefer-spread": "error",
+        "react/jsx-props-no-spreading": ["off"],
+        "react/require-default-props": [2, { "ignoreFunctionalComponents": true }],
+        "object-curly-spacing": [1, "always"],
+        "comma-style": ["error", "last"],
+        "semi": [2, "always"],
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+              "devDependencies": [
+                "**/*.test.js",
+                "**/*.spec.js",
+                "**/*.test.ts",
+                "**/*.spec.ts",
+                "**/*.test.tsx",
+                "**/*.spec.tsx",
+                "src/tests/wrappers/theme-wrapper.tsx"
+              ]
+            }
+          ],
+          "max-len": [
+            "error",
+            {
+              "code": 120,
+              "ignoreComments": true,
+              "ignoreStrings": true,
+              "ignoreUrls": true,
+              "ignorePattern": "d=\"([\\s\\S]*?)\""
+            }]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"],
+                "moduleDirectory": ["node_modules", "src/"]
+            }
+        }
+    }
 }
