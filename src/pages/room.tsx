@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { deleteDoc, collection, onSnapshot, doc, addDoc } from 'firebase/firestore';
-
+import { getFirestore, deleteDoc, collection, onSnapshot, doc, addDoc, setDoc } from 'firebase/firestore';
+// import uuid from 'uuid';
 import PokerAppBar from '../components/AppBar/PokerAppBar';
 import Table from '../components/Table/Table';
 import Card from '../components/Card/Card';
@@ -10,9 +10,26 @@ import HandCardList from '../components/HandCard/HandCardList';
 
 import AppLayout from '../components/AppLayout';
 import initFirebase from '../config';
-import { getRoomDoc, revealedRoom } from '../services/room';
 
-const docName = "teste";
+const docName = "teste"; // uuid.v4();
+
+function getRoomDoc(id: string) {
+    const db = getFirestore();
+
+    const results = doc(collection(db, 'rooms'), id);
+
+    return results;
+}
+
+function revealedRoom(roomId: string) {
+    const docRef = getRoomDoc(roomId);
+
+    setDoc(docRef, {
+        revealed: true
+    }, {
+        merge: true
+    });
+}
 
 const Room: React.FC = () => {
     const [showCards, setShowCards] = useState(false);
@@ -33,12 +50,10 @@ const Room: React.FC = () => {
     }, []);
 
     const handleRevealCards = useCallback(() => {
-
         if (!showCards) {
             setShowCards(true);
             revealedRoom(docName);
         }
-
     }, [showCards]);
 
     const onRealtimeReveal = useCallback(() => {
@@ -61,13 +76,14 @@ const Room: React.FC = () => {
     }, []);
 
     const onRealtimeRevealed = useCallback(() => {
-
         const docRef = getRoomDoc(docName);
 
         const unsubscribe = onSnapshot(docRef, (snapshot) => {
             const data = snapshot.data();
+            if (data.revealed){
+                setShowCards(!!data.revealed);
+            }
 
-            setShowCards(!!data.revealed);
         });
 
         return unsubscribe;
@@ -94,7 +110,6 @@ const Room: React.FC = () => {
     }, [votes, userName]);
 
     const handleResetRoom = useCallback(async () => {
-
         const docRef = getRoomDoc(docName);
 
         const promises = votes.map((vote) => new Promise((resolve) => {
@@ -104,6 +119,14 @@ const Room: React.FC = () => {
 
         await Promise.all(promises);
 
+        setDoc(docRef, {
+            revealed: false
+        }, {
+            merge: true
+        });
+
+        setShowCards(false);
+        setAgreementLevel('');
     }, [votes]);
 
     useEffect(() => {
@@ -113,8 +136,6 @@ const Room: React.FC = () => {
             setAgreementLevel(`${total / votes.length}%`);
         }
     }, [showCards, votes]);
-
-    console.log('snapshot --->', votes);
 
     return (
         <AppLayout>

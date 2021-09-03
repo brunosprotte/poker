@@ -1,15 +1,13 @@
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 
-const db = getFirestore();
-
-export function getRoomDoc(id: string) {
+export function getRoomDoc(id: string, db) {
     const result = doc(collection(db, 'rooms'), id);
 
     return result;
 }
 
-export function revealedRoom(roomId: string) {
-    const docRef = getRoomDoc(roomId);
+export function revealedRoom(roomId: string, db) {
+    const docRef = getRoomDoc(roomId, db);
 
     setDoc(docRef, {
         revealed: true
