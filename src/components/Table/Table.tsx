@@ -5,9 +5,10 @@ import { Container, Content, AgreementContainer } from './Table.styles';
 
 interface TableProps {
     handleRevealCards(): void;
+    agreementLevel: string;
 }
 
-const Table: React.FC<TableProps> = ({ handleRevealCards }) => (
+const Table: React.FC<TableProps> = ({ handleRevealCards, agreementLevel }) => (
     <Container>
         <Content>
             <Button variant='outlined' color='primary' onClick={handleRevealCards}>
@@ -15,7 +16,7 @@ const Table: React.FC<TableProps> = ({ handleRevealCards }) => (
             </Button>
 
             <AgreementContainer>
-                <Box fontWeight={500}>AGREEMENT</Box>
+                <Box fontWeight={500}>AGREEMENT: {agreementLevel}</Box>
             </AgreementContainer>
         </Content>
     </Container>

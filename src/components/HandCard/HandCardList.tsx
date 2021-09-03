@@ -17,13 +17,10 @@ interface HandCardProps {
 const HandCard: React.FC<HandCardProps> = ({ handType, onClickCard }) => {
     const [selectedItem, setSelectedItem] = useState<number | string>('');
 
-    useEffect(() => {
-        onClickCard(selectedItem);
-    }, [onClickCard, selectedItem]);
-
     const handleSelectItem = (item: string | number) => {
         if (item !== selectedItem) {
             setSelectedItem(item);
+            onClickCard(item);
         }
     };
 
@@ -88,4 +85,5 @@ const HandCard: React.FC<HandCardProps> = ({ handType, onClickCard }) => {
 
     return <>{handleCreateHand()}</>;
 };
+
 export default HandCard;
