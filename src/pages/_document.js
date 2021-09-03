@@ -13,6 +13,7 @@ class MyDocument extends Document {
         try {
             ctx.renderPage = () => originalRenderPage({
                 // eslint-disable-next-line react/display-name
+                // eslint-disable-next-line max-len
                 enhanceApp: App => props => styledComponentsSheet.collectStyles(materialSheets.collect(<App {...props} />))
             });
             const initialProps = await Document.getInitialProps(ctx);
