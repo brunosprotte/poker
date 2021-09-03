@@ -3,11 +3,13 @@ import PokerAppBar from '../components/AppBar/PokerAppBar';
 import Table from '../components/Table/Table';
 import Card from '../components/Card/Card';
 
-import { Bottom, Container } from '../../styles/room.styles';
+import { Container, Content, Bottom } from '../../styles/room.styles';
 import HandCardList from '../components/HandCard/HandCardList';
 
 const Room: React.FC = () => {
     const [showCards, setShowCards] = useState(false);
+
+    const [currentCard, setCurrentCard] = useState(null);
 
     const handleRevealCards = () => {
         setShowCards(true);
@@ -16,12 +18,20 @@ const Room: React.FC = () => {
     return (
         <>
             <PokerAppBar />
+
             <Container>
-                <Card isRevealed={showCards} value={8} />
-                <Table handleRevealCards={handleRevealCards} />
+                <Content>
+                    <Card isRevealed={showCards} value={currentCard} />
+                    <Table handleRevealCards={handleRevealCards} />
+                </Content>
             </Container>
             <Bottom>
-                <HandCardList handType={1} />
+                <HandCardList
+                    handType={1}
+                    onClickCard={card => {
+                        setCurrentCard(card);
+                    }}
+                />
             </Bottom>
         </>
     );

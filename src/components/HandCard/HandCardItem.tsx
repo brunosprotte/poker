@@ -12,4 +12,5 @@ const HandCardItem: React.FC<HandCardItemProps> = ({ isSelected, onClick, childr
         {children}
     </Container>
 );
+
 export default HandCardItem;

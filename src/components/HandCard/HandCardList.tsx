@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+import React, { useEffect, useState } from 'react';
 import HandCardItem from './HandCardItem';
 
-enum HandType {
+export enum HandType {
     TShirt,
     Fibbonacci,
     Sequential,
@@ -9,10 +11,15 @@ enum HandType {
 
 interface HandCardProps {
     handType: HandType;
+    onClickCard: (_card: number | string) => void;
 }
 
-const HandCard: React.FC<HandCardProps> = ({ handType }) => {
+const HandCard: React.FC<HandCardProps> = ({ handType, onClickCard }) => {
     const [selectedItem, setSelectedItem] = useState<number | string>('');
+
+    useEffect(() => {
+        onClickCard(selectedItem);
+    }, [onClickCard, selectedItem]);
 
     const handleSelectItem = (item: string | number) => {
         if (item !== selectedItem) {

@@ -11,9 +11,7 @@ const Card: React.FC<CardProps> = ({ isRevealed, value }) => (
     <Container>
         <CardPlaceHolder isRevealed={isRevealed}>
             <CardBack />
-            <CardFront>
-                {value}
-            </CardFront>
+            <CardFront>{value}</CardFront>
         </CardPlaceHolder>
     </Container>
 );

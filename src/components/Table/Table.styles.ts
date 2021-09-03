@@ -17,8 +17,18 @@ export const Container = withTheme(styled('div')`
     margin: 20px;
 `);
 
+export const Content = styled.div`
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
 export const AgreementContainer = withTheme(styled('div')`
     display: flex;
     color: ${props => props.theme.palette.primary.main};
-    margin-top: 53px;
+    bottom: 15px;
+    position: absolute;
 `);

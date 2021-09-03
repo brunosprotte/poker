@@ -5,7 +5,7 @@ Login
     Entrar em uma sala existente
     Criar uma nova sala
 
-    Definar tecnologia para criar sessões/salas, por exemplo: Socket.io
+    Definar tecnologia para criar sessões/salas, por exemplo: Socket.io, Firebase
 
 Room
     Criar cartas ao redor da mesa para cada usuário que entrar na sessão, estas cartas também armazenam o valor jogado pelo usuário
