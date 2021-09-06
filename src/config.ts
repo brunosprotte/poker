@@ -11,7 +11,8 @@ const firebaseConfig = {
 
 export default function initFirebase() {
     if (!getApps().length) {
-        console.log('iniciou');
+        // eslint-disable-next-line no-console
+        console.log('Firebase initialized');
         initializeApp(firebaseConfig);
     }
 }

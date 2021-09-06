@@ -1,6 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { getFirestore, deleteDoc, collection, onSnapshot, doc, addDoc, setDoc } from 'firebase/firestore';
-// import uuid from 'uuid';
+import React, { useContext } from 'react';
+
 import PokerAppBar from '../components/AppBar/PokerAppBar';
 import Table from '../components/Table/Table';
 import Card from '../components/Card/Card';
@@ -9,141 +8,16 @@ import { Container, Content, Bottom } from '../../styles/room.styles';
 import HandCardList from '../components/HandCard/HandCardList';
 
 import AppLayout from '../components/AppLayout';
-import initFirebase from '../config';
-
-const docName = "teste"; // uuid.v4();
-
-function getRoomDoc(id: string) {
-    const db = getFirestore();
-
-    const results = doc(collection(db, 'rooms'), id);
-
-    return results;
-}
-
-function revealedRoom(roomId: string) {
-    const docRef = getRoomDoc(roomId);
-
-    setDoc(docRef, {
-        revealed: true
-    }, {
-        merge: true
-    });
-}
+import { RoomContext } from '../contexts/RoomContext';
 
 const Room: React.FC = () => {
-    const [showCards, setShowCards] = useState(false);
-    const [agreementLevel, setAgreementLevel] = useState('');
-    const [votes, setVotes] = useState<{ id: string; email: string; value: number }[]>([]);
 
-    const [userName, setUserName] = useState('');
-
-    useEffect(() => {
-        initFirebase();
-
-        setUserName(prompt('Informe seu email'));
-
-        onRealtimeReveal();
-
-        onRealtimeRevealed();
-
-    }, []);
-
-    const handleRevealCards = useCallback(() => {
-        if (!showCards) {
-            setShowCards(true);
-            revealedRoom(docName);
-        }
-    }, [showCards]);
-
-    const onRealtimeReveal = useCallback(() => {
-
-        const docRef = getRoomDoc(docName);
-        const votesRef = collection(docRef, 'votes');
-
-        const unsubscribe = onSnapshot(votesRef, (snapshot) => {
-            const { docs } = snapshot;
-
-            if (!docs.length) {
-                setShowCards(false);
-            }
-
-            setVotes(docs.map(item => ({ ...item.data(), id: item.id } as any)));
-        });
-
-        return unsubscribe;
-
-    }, []);
-
-    const onRealtimeRevealed = useCallback(() => {
-        const docRef = getRoomDoc(docName);
-
-        const unsubscribe = onSnapshot(docRef, (snapshot) => {
-            const data = snapshot.data();
-            if (data.revealed){
-                setShowCards(!!data.revealed);
-            }
-
-        });
-
-        return unsubscribe;
-
-    }, []);
-
-    const handleUpdateCard = useCallback(async (value) => {
-
-        const docRef = getRoomDoc(docName);
-
-        const votesCollection = collection(docRef, 'votes');
-
-        const voteExists = votes.find(item => item.email === userName);
-
-        if (voteExists) {
-            return alert("Ops, ja votou!");
-        }
-
-        await addDoc(votesCollection, {
-            value,
-            email: userName
-        });
-
-    }, [votes, userName]);
-
-    const handleResetRoom = useCallback(async () => {
-        const docRef = getRoomDoc(docName);
-
-        const promises = votes.map((vote) => new Promise((resolve) => {
-            const voteDoc = doc(collection(docRef, 'votes'), vote.id);
-            deleteDoc(voteDoc).then(resolve);
-        }));
-
-        await Promise.all(promises);
-
-        setDoc(docRef, {
-            revealed: false
-        }, {
-            merge: true
-        });
-
-        setShowCards(false);
-        setAgreementLevel('');
-    }, [votes]);
-
-    useEffect(() => {
-        if (showCards && votes.length) {
-
-            const total: number = votes.reduce((agg, current) => agg + current.value, 0);
-            setAgreementLevel(`${total / votes.length}%`);
-        }
-    }, [showCards, votes]);
+    const { roomName, showCards, votes } = useContext(RoomContext);
 
     return (
         <AppLayout>
-            <PokerAppBar />
-
+            <PokerAppBar roomName={roomName}/>
             <Container>
-
-                <button onClick={() => handleResetRoom()}>Reseta</button>
                 <Content>
                     {
                         votes.map(vote =>
@@ -155,16 +29,11 @@ const Room: React.FC = () => {
                             />
                         )
                     }
-                    <Table handleRevealCards={handleRevealCards} agreementLevel={agreementLevel} />
+                    <Table />
                 </Content>
             </Container>
             <Bottom>
-                <HandCardList
-                    handType={1}
-                    onClickCard={card => {
-                        handleUpdateCard(card);
-                    }}
-                />
+                <HandCardList handType={1} />
             </Bottom>
         </AppLayout>
     );

@@ -18,7 +18,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const PokerAppBar: React.FC = () => {
+interface PokerBarProps {
+    roomName: string;
+}
+
+const PokerAppBar: React.FC<PokerBarProps> = ({ roomName }) => {
     const classes = useStyles();
 
     return (
@@ -26,7 +30,7 @@ const PokerAppBar: React.FC = () => {
             <AppBar position='static'>
                 <Toolbar>
                     <Typography variant='h6' className={classes.title}>
-                        Room name
+                        {roomName}
                     </Typography>
                     <>
                         <IconButton edge='end' aria-label='share' aria-controls='menu-appbar' color='inherit'>

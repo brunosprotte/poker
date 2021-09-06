@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { RoomContext } from '../../contexts/RoomContext';
 import HandCardItem from './HandCardItem';
 
 export enum HandType {
@@ -11,16 +12,17 @@ export enum HandType {
 
 interface HandCardProps {
     handType: HandType;
-    onClickCard: (_card: number | string) => void;
 }
 
-const HandCard: React.FC<HandCardProps> = ({ handType, onClickCard }) => {
+const HandCard: React.FC<HandCardProps> = ({ handType }) => {
+    const { handleUpdateCard, showCards } = useContext(RoomContext);
+
     const [selectedItem, setSelectedItem] = useState<number | string>('');
 
     const handleSelectItem = (item: string | number) => {
-        if (item !== selectedItem) {
+        if (item !== selectedItem && !showCards) {
+            handleUpdateCard(item);
             setSelectedItem(item);
-            onClickCard(item);
         }
     };
 
