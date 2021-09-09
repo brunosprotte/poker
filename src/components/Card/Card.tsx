@@ -9,7 +9,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ owner, isRevealed, value }) => (
-    <Container>
+    <Container data-testid={owner.name}>
         <CardPlaceHolder isRevealed={isRevealed}>
             <CardBack />
             <CardFront>{value}</CardFront>

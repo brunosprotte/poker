@@ -29,7 +29,7 @@ const PokerAppBar: React.FC<PokerBarProps> = ({ roomName }) => {
         <div className={classes.root}>
             <AppBar position='static'>
                 <Toolbar>
-                    <Typography variant='h6' className={classes.title}>
+                    <Typography data-testid='toolbar-room-name' variant='h6' className={classes.title}  >
                         {roomName}
                     </Typography>
                     <>
