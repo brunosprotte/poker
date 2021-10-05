@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import 'firebase/firestore';
 import Room from '../../src/pages/room';
-import { RoomContext } from '../../src/contexts/RoomContext';
+import { RoomContext } from '../../src/contexts/RoomProvider';
 
 describe('Room', () => {
     let mocked;

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 import React, { useContext, useEffect, useState } from 'react';
-import { RoomContext } from '../../contexts/RoomContext';
+import { RoomContext } from '../../contexts/RoomProvider';
 import HandCardItem from './HandCardItem';
 
 export enum HandType {
@@ -15,12 +15,12 @@ interface HandCardProps {
 }
 
 const HandCard: React.FC<HandCardProps> = ({ handType }) => {
-    const { handleUpdateCard, showCards } = useContext(RoomContext);
+    const { handleUpdateCard, gameSetup, votes } = useContext(RoomContext);
 
     const [selectedItem, setSelectedItem] = useState<number | string>('');
 
     const handleSelectItem = (item: string | number) => {
-        if (item !== selectedItem && !showCards) {
+        if (item !== selectedItem && !gameSetup.revealed) {
             handleUpdateCard(item);
             setSelectedItem(item);
         }
@@ -41,10 +41,15 @@ const HandCard: React.FC<HandCardProps> = ({ handType }) => {
         return fib;
     };
 
-    const handleIsSelected = (index: string | number) => index === selectedItem;
+    const handleIsSelected = (index: string | number) =>
+        !!votes.find(vote => vote.email === gameSetup.name && index === selectedItem);
 
     const createItem = (index: string | number) => (
-        <HandCardItem key={index} isSelected={handleIsSelected(index)} onClick={() => handleSelectItem(index)}>
+        <HandCardItem
+            key={index}
+            isSelected={handleIsSelected(index)}
+            onClick={() => handleSelectItem(index)}
+        >
             {index}
         </HandCardItem>
     );

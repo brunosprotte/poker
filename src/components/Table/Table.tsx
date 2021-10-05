@@ -2,17 +2,17 @@ import React, { useContext } from 'react';
 import { Box, Button } from '@material-ui/core';
 
 import { Container, Content, AgreementContainer } from './Table.styles';
-import { RoomContext } from '../../contexts/RoomContext';
+import { RoomContext } from '../../contexts/RoomProvider';
 
 const Table: React.FC = () => {
 
-    const { showCards, handleRevealCards, handleResetRoom, agreementLevel } = useContext(RoomContext);
+    const { gameSetup, handleRevealCards, handleResetRoom, agreementLevel } = useContext(RoomContext);
 
     return (
         <Container>
             <Content>
 
-                {showCards ?
+                {gameSetup.revealed ?
                     <Button
                         variant='outlined' color='primary' onClick={handleResetRoom}>
                         Reset

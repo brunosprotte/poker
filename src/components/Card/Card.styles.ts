@@ -7,16 +7,19 @@ interface CardProps {
 
 export const Container = withTheme(styled('div')`
     display: flex;
+    flex-direction: column;
 
-    width: 60px;
-    height: 80px;
+    padding: 5px;
 
     background-color: transparent;
 `);
 
 export const CardPlaceHolder = withTheme(styled.div<CardProps>`
-    width: 100%;
-    height: 100%;
+    width: 60px;
+    min-width: 60px;
+
+    height: 80px;
+    min-height: 80px;
 
     align-items: center;
     justify-content: center;
