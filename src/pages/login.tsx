@@ -12,14 +12,6 @@ const Login: React.FC = () => {
 
     const router = useRouter();
 
-    // const [gameSetup, setGameSetup] = useState<GameSetupInterface>({
-    //     name: "",
-    //     roomId: "",
-    //     roomName: "",
-    //     gameType:2,
-    //     revealed: false
-    // });
-
     const { gameSetup, setGameSetup, createRoom } = useContext(RoomContext);
 
     const handleJoinRoom = () =>{
@@ -27,7 +19,7 @@ const Login: React.FC = () => {
     };
 
     const handleChange = (e) => {
-        setGameSetup({ ...gameSetup, [e.target.name]: e.target.value  });
+        setGameSetup({ ...gameSetup, [e.target.name]: e.target.value });
     };
 
     return (
@@ -35,6 +27,7 @@ const Login: React.FC = () => {
             <Container>
                 <JoinSection>
                     <TextField
+                        data-testid="join-name"
                         name="name"
                         variant="outlined"
                         label="Name"
@@ -43,6 +36,7 @@ const Login: React.FC = () => {
                     />
 
                     <TextField
+                        data-testid="join-roomId"
                         name="roomId"
                         variant="outlined"
                         label="Room ID"
@@ -51,6 +45,7 @@ const Login: React.FC = () => {
                     />
 
                     <Button
+                        data-testid="join-joinButton"
                         variant="outlined"
                         color="primary"
                         onClick={handleJoinRoom}
@@ -61,6 +56,7 @@ const Login: React.FC = () => {
 
                 <JoinSection>
                     <TextField
+                        data-testid="create-name"
                         id="name"
                         name="name"
                         variant="outlined"
@@ -70,6 +66,7 @@ const Login: React.FC = () => {
                     />
 
                     <TextField
+                        data-testid="create-roomName"
                         id="roomName"
                         name="roomName"
                         variant="outlined"
@@ -80,6 +77,7 @@ const Login: React.FC = () => {
 
                     <InputLabel id="select-game-type-label">Game type</InputLabel>
                     <Select
+                        data-testid="create-gameType"
                         name="gameType"
                         labelId="select-game-type-label"
                         id="select-game-type"
@@ -94,6 +92,7 @@ const Login: React.FC = () => {
                     </Select>
 
                     <Button
+                        data-testid="create-createButton"
                         variant="outlined"
                         color="primary"
                         onClick={() => createRoom(gameSetup)}

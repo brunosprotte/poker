@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import { Container, Content, AgreementContainer } from './Table.styles';
 import { RoomContext } from '../../contexts/RoomProvider';
@@ -24,7 +24,8 @@ const Table: React.FC = () => {
                 }
 
                 <AgreementContainer>
-                    <Box fontWeight={500}>AGREEMENT: {agreementLevel}</Box>
+                    {/* <Box fontWeight={500}></Box> */}
+                    AGREEMENT: {agreementLevel}
                 </AgreementContainer>
             </Content>
         </Container>
