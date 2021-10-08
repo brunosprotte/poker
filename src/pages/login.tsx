@@ -27,7 +27,7 @@ const Login: React.FC = () => {
             <Container>
                 <JoinSection>
                     <TextField
-                        data-testid="join-name"
+                        id="join-name"
                         name="name"
                         variant="outlined"
                         label="Name"
@@ -36,7 +36,7 @@ const Login: React.FC = () => {
                     />
 
                     <TextField
-                        data-testid="join-roomId"
+                        id="join-roomId"
                         name="roomId"
                         variant="outlined"
                         label="Room ID"
@@ -45,7 +45,7 @@ const Login: React.FC = () => {
                     />
 
                     <Button
-                        data-testid="join-joinButton"
+                        id="join-joinButton"
                         variant="outlined"
                         color="primary"
                         onClick={handleJoinRoom}
@@ -56,8 +56,7 @@ const Login: React.FC = () => {
 
                 <JoinSection>
                     <TextField
-                        data-testid="create-name"
-                        id="name"
+                        id="create-name"
                         name="name"
                         variant="outlined"
                         label="Name"
@@ -66,8 +65,7 @@ const Login: React.FC = () => {
                     />
 
                     <TextField
-                        data-testid="create-roomName"
-                        id="roomName"
+                        id="create-roomName"
                         name="roomName"
                         variant="outlined"
                         label="Room name"
@@ -77,10 +75,9 @@ const Login: React.FC = () => {
 
                     <InputLabel id="select-game-type-label">Game type</InputLabel>
                     <Select
-                        data-testid="create-gameType"
+                        id="create-gameType"
                         name="gameType"
                         labelId="select-game-type-label"
-                        id="select-game-type"
                         value={gameSetup.gameType}
                         label="Game type"
                         onChange={handleChange}
@@ -92,7 +89,7 @@ const Login: React.FC = () => {
                     </Select>
 
                     <Button
-                        data-testid="create-createButton"
+                        id="create-createButton"
                         variant="outlined"
                         color="primary"
                         onClick={() => createRoom(gameSetup)}

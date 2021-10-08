@@ -211,7 +211,7 @@ export function RoomProvider({ children }: RoomProviderProps) {
                 open={openErrorDialog}
             >
                 <DialogContent>
-                    <DialogContentText>
+                    <DialogContentText data-testid="dialog-not-found-error-text">
                         Room not found!
                     </DialogContentText>
                 </DialogContent>
