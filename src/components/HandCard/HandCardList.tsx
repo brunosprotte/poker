@@ -49,6 +49,12 @@ const HandCard: React.FC<HandCardProps> = ({ handType }) => {
             key={index}
             isSelected={handleIsSelected(index)}
             onClick={() => handleSelectItem(index)}
+            _rest={
+                {
+                    'data-testid':`hand-card-item-${index}`,
+                    id: `hand-card-item-${index}`
+                }
+            }
         >
             {index}
         </HandCardItem>

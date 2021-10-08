@@ -14,16 +14,17 @@ const Table: React.FC = () => {
 
                 {gameSetup.revealed ?
                     <Button
-                        variant='outlined' color='primary' onClick={handleResetRoom}>
+                        data-testid='table-button-reset' id='table-button-reset' variant='outlined' color='primary' onClick={handleResetRoom}>
                         Reset
                     </Button>
                     :
-                    <Button variant='outlined' color='primary' onClick={handleRevealCards}>
+                    <Button
+                        data-testid='table-button-reveal' id='table-button-reveal' variant='outlined' color='primary' onClick={handleRevealCards}>
                         Reveal
                     </Button>
                 }
 
-                <AgreementContainer>
+                <AgreementContainer data-testid='table-agreement' id='table-agreement'>
                     {/* <Box fontWeight={500}></Box> */}
                     AGREEMENT: {agreementLevel}
                 </AgreementContainer>

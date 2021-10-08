@@ -6,18 +6,19 @@ import { RoomContext } from '../../contexts/RoomProvider';
 interface CardProps {
     owner: any;
     value: number | string;
+    _rest?: {};
 }
 
-const Card: React.FC<CardProps> = ({ owner, value }) => {
+const Card: React.FC<CardProps> = ({ owner, value, _rest }) => {
 
     const { gameSetup } = useContext(RoomContext);
 
     return (
-        <Container data-testid={owner.name}>
+        <Container {..._rest}>
             {owner?.name}
             <CardPlaceHolder isRevealed={gameSetup.revealed}>
                 <CardBack />
-                <CardFront>{value}</CardFront>
+                <CardFront data-testid={`played-card-value-${owner.name}`}>{value}</CardFront>
             </CardPlaceHolder>
 
         </Container>

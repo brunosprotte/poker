@@ -22,9 +22,14 @@ const Room: React.FC = () => {
                     {
                         votes.map(vote =>
                             <Card
+                                data-testid={`played-card-${vote.email}`}
                                 key={vote.email}
                                 value={vote.value}
                                 owner={{ name: vote.email }}
+                                _rest={
+                                    {
+                                        id:`played-card-${vote.email}` }
+                                }
                             />
                         )
                     }

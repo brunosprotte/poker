@@ -27,6 +27,7 @@ const Login: React.FC = () => {
             <Container>
                 <JoinSection>
                     <TextField
+                        data-testid="join-name"
                         id="join-name"
                         name="name"
                         variant="outlined"
@@ -36,6 +37,7 @@ const Login: React.FC = () => {
                     />
 
                     <TextField
+                        data-testid="join-roomId"
                         id="join-roomId"
                         name="roomId"
                         variant="outlined"
@@ -45,6 +47,7 @@ const Login: React.FC = () => {
                     />
 
                     <Button
+                        data-testid="join-joinButton"
                         id="join-joinButton"
                         variant="outlined"
                         color="primary"
@@ -56,6 +59,7 @@ const Login: React.FC = () => {
 
                 <JoinSection>
                     <TextField
+                        data-testid="create-name"
                         id="create-name"
                         name="name"
                         variant="outlined"
@@ -65,6 +69,7 @@ const Login: React.FC = () => {
                     />
 
                     <TextField
+                        data-testid="create-roomName"
                         id="create-roomName"
                         name="roomName"
                         variant="outlined"
@@ -75,6 +80,7 @@ const Login: React.FC = () => {
 
                     <InputLabel id="select-game-type-label">Game type</InputLabel>
                     <Select
+                        data-testid="create-gameType"
                         id="create-gameType"
                         name="gameType"
                         labelId="select-game-type-label"
@@ -83,12 +89,13 @@ const Login: React.FC = () => {
                         onChange={handleChange}
                         fullWidth
                     >
-                        <MenuItem value={1}>T-shirt</MenuItem>
-                        <MenuItem value={2}>Fibbonacci</MenuItem>
-                        <MenuItem value={3}>Sequential</MenuItem>
+                        <MenuItem data-testid="create-gameType-t-shirt" id="create-gameType-t-shirt" value={1}>T-shirt</MenuItem>
+                        <MenuItem data-testid="create-gameType-fibbonacci" id="create-gameType-fibbonacci" value={2}>Fibbonacci</MenuItem>
+                        <MenuItem data-testid="create-gameType-sequential" id="create-gameType-sequential" value={3}>Sequential</MenuItem>
                     </Select>
 
                     <Button
+                        data-testid="create-createButton"
                         id="create-createButton"
                         variant="outlined"
                         color="primary"
